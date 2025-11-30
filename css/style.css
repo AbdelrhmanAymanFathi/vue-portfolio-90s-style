@@ -1,0 +1,298 @@
+:root {
+    --neon-cyan: #00ffff;
+    --neon-magenta: #ff00ff;
+    --neon-yellow: #ffff00;
+    --neon-green: #00ff00;
+    --metal-light: #d4d4d4;
+    --metal-dark: #7f7f7f;
+    --panel-bg: #0b1220;
+}
+
+body {
+    background: repeating-linear-gradient(45deg, #0f1724 0 8px, #0b1220 8px 16px);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 2rem;
+    color: #e6eef8;
+}
+
+.window {
+    width: 1100px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, #081126 0%, #061028 60%);
+    border: 6px solid var(--metal-dark);
+    box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.6);
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+}
+
+.titlebar {
+    background: linear-gradient(90deg, #001033, #0b2b44);
+    color: #fff;
+    padding: .5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: "Press Start 2P", monospace;
+    font-size: 12px;
+    letter-spacing: .5px;
+}
+
+.controls {
+    display: flex;
+    gap: .4rem;
+    align-items: center;
+}
+
+.ctrl {
+    width: 26px;
+    height: 18px;
+    display: inline-grid;
+    place-items: center;
+    background: linear-gradient(180deg, var(--metal-light), var(--metal-dark));
+    border: 2px solid #000;
+    font-weight: bold;
+    color: #111;
+    border-radius: 3px;
+    box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
+.hero {
+    text-align: center;
+    padding: 2rem 1rem;
+    border-bottom: 3px dashed rgba(0, 255, 255, 0.12);
+}
+
+.hero h1 {
+    font-family: "Press Start 2P", monospace;
+    font-size: 28px;
+    margin: 0;
+    color: var(--neon-yellow);
+    text-shadow:
+        2px 2px 0 #000,
+        0 0 8px rgba(255, 0, 255, 0.12),
+        0 0 16px rgba(0, 255, 255, 0.08);
+}
+
+.hero .vueword {
+    color: var(--neon-cyan);
+    text-shadow: 2px 2px 0 #000, 0 0 8px rgba(0, 255, 255, 0.32);
+    display: inline-block;
+    margin-left: .6rem;
+}
+
+.hero .subtitle {
+    font-size: 11px;
+    color: #cfe8ff;
+    margin-top: .6rem;
+}
+
+.panel {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.15));
+    border: 3px solid rgba(255, 255, 255, 0.06);
+    padding: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.6);
+}
+
+.panel-retro {
+    border: 4px solid var(--metal-dark);
+    background: linear-gradient(180deg, #071021, #0b1623);
+}
+
+.neon-outline {
+    box-shadow: 0 0 8px rgba(0, 255, 255, 0.12), inset 0 0 8px rgba(255, 0, 255, 0.02);
+    border: 2px dashed rgba(0, 255, 255, 0.12);
+}
+
+.info-row {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 6px;
+    background: linear-gradient(180deg, #313131, #111);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Press Start 2P";
+    font-size: 10px;
+    color: #0ff;
+    border: 3px solid #000;
+    overflow: hidden;
+}
+
+.avatar img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.contact a {
+    color: var(--neon-cyan);
+    text-decoration: underline;
+}
+
+.muted {
+    color: #9fb2c9;
+    font-size: 13px;
+}
+
+.section-title {
+    font-family: "Press Start 2P";
+    font-size: 12px;
+    color: var(--neon-yellow);
+    text-shadow: 1px 1px 0 #000;
+    margin-bottom: .6rem;
+}
+
+.retro-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: monospace;
+}
+
+.retro-table th,
+.retro-table td {
+    padding: .6rem;
+    border: 1px solid #333;
+    background: linear-gradient(180deg, #0d1a2b, #07101a);
+    color: #dbefff;
+    font-size: 13px;
+}
+
+.retro-true {
+    color: var(--neon-green);
+    font-weight: 700;
+}
+
+.retro-false {
+    color: #ff6666;
+    font-weight: 700;
+}
+
+.chip {
+    display: inline-block;
+    padding: .25rem .5rem;
+    border-radius: 6px;
+    background: #091a2b;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    font-size: 12px;
+    color: #bfe3ff;
+}
+
+.badge {
+    display: inline-block;
+    padding: .15rem .45rem;
+    border-radius: 4px;
+    font-size: 11px;
+    background: linear-gradient(180deg, #222, #111);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: var(--neon-cyan);
+}
+
+footer {
+    padding: .8rem 1rem;
+    font-size: 12px;
+    color: #a8c5db;
+    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.02));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width:1200px) {
+    .window {
+        width: 95%;
+    }
+
+    .info-row {
+        flex-direction: column;
+    }
+}
+
+/* modal styles */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 60;
+    backdrop-filter: blur(2px);
+}
+
+.modal {
+    width: 760px;
+    max-width: calc(100% - 48px);
+    background: linear-gradient(180deg, #071426, #0a1822);
+    border: 4px solid var(--metal-dark);
+    padding: 1.2rem;
+    border-radius: 8px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+    color: #eaf6ff;
+    position: relative;
+    font-family: Inter, Arial, sans-serif;
+}
+
+.modal .modal-title {
+    font-family: "Press Start 2P", monospace;
+    font-size: 14px;
+    color: var(--neon-cyan);
+    margin-bottom: 0.6rem;
+    text-shadow: 1px 1px 0 #000;
+}
+
+.modal .modal-body {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 1rem;
+    align-items: start;
+}
+
+.modal .close-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 34px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(180deg, #f66, #b11);
+    color: #fff;
+    border: 2px solid #000;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.5);
+}
+
+.modal .action-link {
+    display: inline-block;
+    margin-top: .6rem;
+    background: linear-gradient(180deg, #0ff2ff, #00a3c9);
+    padding: .45rem .6rem;
+    border-radius: 6px;
+    color: #001;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.45);
+}
+
+/* interaction */
+.retro-table tbody tr {
+    cursor: pointer;
+}
+
+.retro-table tbody tr:hover {
+    outline: 2px dashed rgba(0, 255, 255, 0.08);
+}
