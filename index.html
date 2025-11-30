@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
     <title>Abdelrhman Ayman Fathi — 90s CV (Vue + Tailwind) — With Modal</title>
 
     <!-- Tailwind CDN (for quick prototype) -->
@@ -22,7 +22,16 @@
 
   <body>
     <div id="app">
-      <div class="window" role="main">
+      <!-- Mobile Warning Banner -->
+      <div v-if="isMobile" style="position: fixed; top: 0; left: 0; right: 0; background: linear-gradient(90deg, #ff00ff, #00ffff); padding: 1rem; text-align: center; color: #000; font-weight: bold; font-size: 14px; z-index: 100; box-shadow: 0 4px 0 rgba(0, 0, 0, 0.6);">
+        <div style="max-width: 1100px; margin: 0 auto;">
+          💻 Better experience on desktop! This site is optimized for desktop/tablet viewing. 📱
+          <button @click="closeMobileWarning" style="margin-left: 1rem; padding: 0.3rem 0.6rem; background: rgba(0, 0, 0, 0.3); border: 2px solid #000; cursor: pointer; border-radius: 4px; color: #000; font-weight: bold;">✕</button>
+        </div>
+      </div>
+
+      <div :style="isMobile && !mobileWarningClosed ? 'margin-top: 60px;' : ''">
+      <div id="app">
         <div class="titlebar" role="banner">
           <div>Start Abdelrhman Ayman Fathi&apos;s CV.exe</div>
           <div class="controls" aria-hidden="true">
@@ -42,9 +51,9 @@
           </div>
         </div>
 
-        <div class="p-6 grid grid-cols-3 gap-6">
+        <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
           <!-- Left column: Profile -->
-          <div class="col-span-2">
+          <div class="col-span-1 md:col-span-2 w-full">
             <div class="panel panel-retro p-4 mb-4">
               <div class="info-row">
                 <div class="avatar">
@@ -62,25 +71,25 @@
                     <div class="chip">{{ cv.location || 'Maadi, Cairo' }}</div>
                   </div>
 
-                  <div class="mt-4 grid grid-cols-2 gap-2">
-                    <div>
+                  <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2 w-full">
+                    <div class="min-w-0">
                       <div class="muted">Phone</div>
-                      <div><a :href="'tel:'+cv.phone" class="contact">{{ cv.phone }}</a></div>
+                      <div class="break-words"><a :href="'tel:'+cv.phone" class="contact">{{ cv.phone }}</a></div>
                     </div>
 
-                    <div>
+                    <div class="min-w-0">
                       <div class="muted">Email</div>
-                      <div><a :href="'mailto:'+cv.email" class="contact">{{ cv.email }}</a></div>
+                      <div class="break-words"><a :href="'mailto:'+cv.email" class="contact break-all">{{ cv.email }}</a></div>
                     </div>
 
-                    <div class="mt-2">
+                    <div class="mt-2 min-w-0">
                       <div class="muted">LinkedIn</div>
-                      <div><a :href="cv.linkedin" target="_blank" rel="noopener">{{ cv.linkedin }}</a></div>
+                      <div class="break-words"><a :href="cv.linkedin" target="_blank" rel="noopener" class="break-all">{{ cv.linkedin }}</a></div>
                     </div>
 
-                    <div class="mt-2">
+                    <div class="mt-2 min-w-0">
                       <div class="muted">GitHub</div>
-                      <div><a :href="cv.github" target="_blank" rel="noopener">{{ cv.github }}</a></div>
+                      <div class="break-words"><a :href="cv.github" target="_blank" rel="noopener" class="break-all">{{ cv.github }}</a></div>
                     </div>
                   </div>
 
@@ -169,7 +178,7 @@
           </div>
 
           <!-- Right column: Summary & Experience -->
-          <div class="col-span-1">
+          <div class="col-span-1 md:col-span-1 w-full">
             <div class="panel p-4 mb-4" style="height: 260px; overflow: auto">
               <div class="section-title">SUMMARY</div>
               <div class="text-sm">{{ cv.summary }}</div>
@@ -250,6 +259,7 @@
           <div class="muted">Best viewed with Netscape Navigator • Retro vibes</div>
         </footer>
       </div>
+      </div>
 
       <!-- PDF Modal -->
       <div v-if="pdfModalOpen" class="modal-overlay" @click.self="closePdfModal" role="dialog" aria-modal="true">
@@ -324,6 +334,8 @@
             selectedTest: null,
             birthDate: '',
             daysLived: null,
+            isMobile: false,
+            mobileWarningClosed: false,
             cv: {
               name: "Abdelrhman Ayman Fathi",
               role: "Front-End Web & Cross-Platform Mobile Developer",
@@ -455,11 +467,26 @@
               if (e && (e.key === 'Escape' || e.key === 'Esc')) {
                 this.closeModal();
               }
+            },
+            checkMobileSize() {
+              this.isMobile = window.innerWidth < 768;
+            },
+            closeMobileWarning() {
+              this.mobileWarningClosed = true;
             }
+          },
+          mounted() {
+            // Detect mobile device
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            this.isMobile = /android|webos|iphone|ipad|ipot|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase()) || window.innerWidth < 768;
+            
+            // Listen for resize to update mobile status
+            window.addEventListener('resize', this.checkMobileSize);
           },
           beforeDestroy() {
             window.removeEventListener('keydown', this._escHandler);
             window.removeEventListener('keydown', this._pdfEscHandler);
+            window.removeEventListener('resize', this.checkMobileSize);
           }
         });
       })();
